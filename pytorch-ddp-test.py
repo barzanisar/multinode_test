@@ -31,9 +31,15 @@ parser.add_argument('--dist-backend', default='gloo', type=str, help='')
 parser.add_argument('--world_size', default=1, type=int, help='')
 parser.add_argument('--distributed', action='store_true', help='')
 
+# For using torch.distributed.launch, see https://github.com/pytorch/pytorch/blob/main/torch/distributed/launch.py
+parser.add_argument('--local-rank', type=int, default=0, help='')
+
 
 def main():
     print("Starting...")
+    slurm_localid = int(os.environ.get("SLURM_LOCALID"))
+    print(
+        f"args.local_rank: {args.local_rank}, SLURM_LOCALID: {slurm_localid} ")
 
     args = parser.parse_args()
 
@@ -43,10 +49,10 @@ def main():
 		SLURM_NODEID is 0 or 1 in this example, SLURM_LOCALID is the id of the 
  		current process inside a node and is also 0 or 1 in this example."""
 
-    local_rank = int(os.environ.get("SLURM_LOCALID"))
+    local_rank = args.local_rank  # int(os.environ.get("SLURM_LOCALID"))
     rank = int(os.environ.get("SLURM_NODEID"))*ngpus_per_node + local_rank
 
-    if rank==0:
+    if rank == 0:
         print("=" * 30 + "   SLURM   " + "=" * 30)
         for env in os.environ.keys():
             if 'SLURM' in env:
@@ -57,7 +63,7 @@ def main():
     torch.cuda.set_device(current_device)
 
     # """ this block initializes a process group and initiate communications
-	# 	between all processes running on all nodes """
+    # 	between all processes running on all nodes """
 
     print('From Rank: {}, ==> Initializing Process Group...'.format(rank))
     # init the process group
@@ -149,7 +155,8 @@ def train(epoch, net, criterion, optimizer, train_loader, train_rank):
 
         elapse_time = time.time() - epoch_start
         elapse_time = datetime.timedelta(seconds=elapse_time)
-        print("From Rank: {}, Training time {}, Batch idx: {}".format(train_rank, elapse_time, batch_idx))
+        print("From Rank: {}, Training time {}, Batch idx: {}".format(
+            train_rank, elapse_time, batch_idx))
 
 
 if __name__ == '__main__':
