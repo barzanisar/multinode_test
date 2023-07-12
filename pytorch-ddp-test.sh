@@ -12,7 +12,7 @@
 srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_ddp.sh
 
 export NCCL_BLOCKING_WAIT=1  #Set this environment variable if you wish to use the NCCL backend for inter-GPU communication.
-export MASTER_ADDR=$(hostname) #Store the master node’s IP address in the MASTER_ADDR environment variable.
+export MASTER_ADDR='127.0.0.1' #$(hostname) #Store the master node’s IP address in the MASTER_ADDR environment variable.
 export MASTER_PORT=34567
 
 srun launch_training_ddp.sh
