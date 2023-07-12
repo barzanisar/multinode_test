@@ -14,4 +14,5 @@ srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_acc.sh
 export MASTER_ADDR=$(hostname) #Store the master node’s IP address in the MASTER_ADDR environment variable.
 export MASTER_PORT=34567
 
+# srun will run this script <tasks-per-node * nodes> times i.e. 4 x 2 = 8 times
 srun launch_training_acc.sh
