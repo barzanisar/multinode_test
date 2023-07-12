@@ -9,7 +9,7 @@
 #SBATCH --account=rrg-swasland
 
 ## Create a virtualenv and install accelerate + its dependencies on all nodes ##
-srun -N $SLURM_NNODES -n $SLURM_NNODES config_env.sh
+srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_ddp.sh
 
 export NCCL_BLOCKING_WAIT=1  #Set this environment variable if you wish to use the NCCL backend for inter-GPU communication.
 export MASTER_ADDR=$(hostname) #Store the master node’s IP address in the MASTER_ADDR environment variable.

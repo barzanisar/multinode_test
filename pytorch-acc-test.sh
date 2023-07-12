@@ -9,7 +9,7 @@
 #SBATCH --account=rrg-swasland
 
 ## Create a virtualenv and install accelerate + its dependencies on all nodes ##
-srun -N $SLURM_NNODES -n $SLURM_NNODES config_env.sh
+srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_acc.sh
 
 export MASTER_ADDR=$(hostname) #Store the master node’s IP address in the MASTER_ADDR environment variable.
 export MASTER_PORT=34567
