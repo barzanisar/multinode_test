@@ -4,7 +4,7 @@
 #SBATCH --tasks-per-node=1   # Request 1 process per GPU. You will get 1 CPU per process by default. Request more CPUs with the "cpus-per-task" parameter to enable multiple data-loader workers to load data in parallel.
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64000M      
-#SBATCH --time=0-01:00
+#SBATCH --time=0-00:10
 #SBATCH --output=%N-%j.out
 #SBATCH --account=rrg-swasland
 
