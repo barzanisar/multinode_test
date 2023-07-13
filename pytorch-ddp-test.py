@@ -37,11 +37,11 @@ parser.add_argument('--local-rank', type=int, default=0, help='')
 
 def main():
     print("Starting...")
-    slurm_localid = int(os.environ.get("SLURM_LOCALID"))
-
     args = parser.parse_args()
-    print(
-        f"args.local_rank: {args.local_rank}, SLURM_LOCALID: {slurm_localid} ")
+
+    #slurm_localid = int(os.environ.get("SLURM_LOCALID"))
+    # print(
+    #     f"args.local_rank: {args.local_rank}, SLURM_LOCALID: {slurm_localid} ")
 
     ngpus_per_node = torch.cuda.device_count()
 
@@ -52,11 +52,11 @@ def main():
     local_rank = args.local_rank  # int(os.environ.get("SLURM_LOCALID"))
     rank = int(os.environ.get("SLURM_NODEID"))*ngpus_per_node + local_rank
 
-    if rank == 0:
-        print("=" * 30 + "   SLURM   " + "=" * 30)
-        for env in os.environ.keys():
-            if 'SLURM' in env:
-                print('{:30}: {}'.format(env, os.environ[env]))
+    # if rank == 0:
+    #     print("=" * 30 + "   SLURM   " + "=" * 30)
+    #     for env in os.environ.keys():
+    #         if 'SLURM' in env:
+    #             print('{:30}: {}'.format(env, os.environ[env]))
 
     current_device = local_rank
 
