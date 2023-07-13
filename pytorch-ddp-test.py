@@ -38,10 +38,10 @@ parser.add_argument('--local-rank', type=int, default=0, help='')
 def main():
     print("Starting...")
     slurm_localid = int(os.environ.get("SLURM_LOCALID"))
-    print(
-        f"args.local_rank: {args.local_rank}, SLURM_LOCALID: {slurm_localid} ")
 
     args = parser.parse_args()
+    print(
+        f"args.local_rank: {args.local_rank}, SLURM_LOCALID: {slurm_localid} ")
 
     ngpus_per_node = torch.cuda.device_count()
 
