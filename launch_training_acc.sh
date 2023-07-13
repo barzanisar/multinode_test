@@ -1,7 +1,9 @@
 #!/bin/bash
 
 source $SLURM_TMPDIR/env/bin/activate
-export NCCL_ASYNC_ERROR_HANDLING=1
+export NCCL_BLOCKING_WAIT=1
+# export NCCL_ASYNC_ERROR_HANDLING=1
+# export NCCL_DEBUG=INFO
 
 echo "Node $SLURM_NODEID says: main node at $MASTER_ADDR:$MASTER_PORT"
 echo "Node $SLURM_NODEID says: Launching python script with accelerate..."
@@ -16,5 +18,5 @@ accelerate launch \
 --num_processes=8 \ # This is the total number of GPUs across all nodes
 --main_process_ip="$MASTER_ADDR" \
 --main_process_port=34567 \
-pytorch-acc-test.py --batch_size 256 --num_workers=4
+pytorch-acc-test.py --batch_size 256 --num_workers=2
 
