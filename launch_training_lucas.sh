@@ -13,7 +13,7 @@ time accelerate launch \
 --gpu_ids="all" \
 --num_machines=$SLURM_NNODES \
 --machine_rank=$SLURM_NODEID \
---num_processes=4 \
+--num_processes=8 \
 --main_process_ip="$HEAD_NODE" \
 --main_process_port=34567 \
 pytorch-lucas.py --batch_size 4096 --num_workers=2
