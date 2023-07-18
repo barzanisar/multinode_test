@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --nodes 2             
-#SBATCH --gres=gpu:4          # Request 2 GPU "generic resources”.
-#SBATCH --tasks-per-node=1    # Request 1 process per GPU. You will get 1 CPU per process by default. Request more CPUs with the "cpus-per-task" parameter to enable multiple data-loader workers to load data in parallel.
-#SBATCH --cpus-per-task=8
+#SBATCH --nodes 1             
+#SBATCH --gres=gpu:4          
+#SBATCH --tasks-per-node=4    
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=8G      
-#SBATCH --time=0-01:00
+#SBATCH --time=0-00:10
 #SBATCH --output=%N-%j.out
 #SBATCH --account=rrg-swasland
 
@@ -19,4 +19,4 @@ export NCCL_BLOCKING_WAIT=1 #Pytorch Lightning uses the NCCL backend for inter-G
 # If it is, it expects the user to have requested one task per GPU.
 # If you do not ask for 1 task per GPU, and you do not run your script with "srun", your job will fail!
 
-srun python pytorch-ddp-test-pl.py  --batch_size 256 --num_workers 8
+srun python pytorch-ddp-test-pl.py  --batch_size 256 --num_workers 2

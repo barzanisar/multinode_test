@@ -17,6 +17,6 @@ accelerate launch \
 --machine_rank=$SLURM_NODEID \
 --num_processes=8 \ # This is the total number of GPUs across all nodes
 --main_process_ip="$MASTER_ADDR" \
---main_process_port=34567 \
+--main_process_port=$MASTER_PORT \
 pytorch-acc-test.py --batch_size 256 --num_workers=2
 
