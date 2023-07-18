@@ -39,10 +39,6 @@ def main():
     print("Starting...")
     args = parser.parse_args()
 
-    #slurm_localid = int(os.environ.get("SLURM_LOCALID"))
-    # print(
-    #     f"args.local_rank: {args.local_rank}, SLURM_LOCALID: {slurm_localid} ")
-
     ngpus_per_node = torch.cuda.device_count()
 
     """ This next line is the key to getting DistributedDataParallel working on SLURM:
@@ -100,7 +96,7 @@ def main():
     net = torch.nn.parallel.DistributedDataParallel(
         net, device_ids=[current_device])
 
-    # print('From Rank: {}, ==> Preparing data..'.format(rank))
+    print('From Rank: {}, ==> Preparing data..'.format(rank))
 
     transform_train = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
