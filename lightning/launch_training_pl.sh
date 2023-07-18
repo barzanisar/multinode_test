@@ -10,4 +10,4 @@ echo "Node $SLURM_NODEID says: Launching python script..."
 echo "SLURM NTASKS: $SLURM_NTASKS"
 echo "SLURM_NNODES: $SLURM_NNODES" 
 
-srun python pytorch-ddp-test-pl.py  --batch_size 256 --num_workers 2
+srun python pytorch-pl-test.py  --batch_size 256 --num_workers 2
