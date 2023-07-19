@@ -10,5 +10,6 @@
 
 echo "SLURM_NNODES: $SLURM_NNODES"
 srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_pl.sh
+wait 10
 
 srun launch_training_pl.sh
