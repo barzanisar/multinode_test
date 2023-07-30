@@ -9,17 +9,17 @@ ssh into your account on compute canada and clone this repo
 ## Using accelerate
 1. ssh into your account on compute canada
 2. cd to multinode_test/accelerate
-3. run `sbatch pytorch-acc-test.sh`
+3. run `sbatch submit_job.sh`
 
 ## Using ddp
 1. ssh into your account on compute canada
 2. cd to multinode_test/ddp
-3. run `sbatch pytorch-ddp-test.sh`
+3. run `sbatch submit_job.sh`
 
 ## Using pytorch lightning (not working)
 1. ssh into your account on compute canada
 2. cd to multinode_test/lightning
-3. run `sbatch pytorch-pl-test.sh`
+3. run `sbatch submit_job.sh`
 
 ## Permission denied error
 
