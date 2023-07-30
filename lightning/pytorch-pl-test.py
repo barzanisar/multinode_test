@@ -65,13 +65,13 @@ def main():
    net = Net()
 
    """ Here we initialize a Trainer() explicitly with 1 node and 2 GPUs per node.
-      To make this script more generic, you can use torch.cuda.device_count() to set the number of GPUs
-      and you can use int(os.environ.get("SLURM_JOB_NUM_NODES")) to set the number of nodes. 
+      To make this script more generic, you can use torch.cuda.device_count()=4 to set the number of GPUs
+      and you can use int(os.environ.get("SLURM_JOB_NUM_NODES"))=2 to set the number of nodes. 
       We also set progress_bar_refresh_rate=0 to avoid writing a progress bar to the logs, 
       which can cause issues due to updating logs too frequently."""
 
-   trainer = pl.Trainer(devices=4, num_nodes=2, accelerator='gpu', strategy='ddp', max_epochs = args.max_epochs) 
-   #trainer = pl.Trainer(devices=torch.cuda.device_count(), num_nodes=1, accelerator='gpu', strategy='ddp', max_epochs = args.max_epochs) 
+   trainer = pl.Trainer(devices=torch.cuda.device_count(), num_nodes=int(os.environ.get("SLURM_JOB_NUM_NODES")), 
+                        accelerator='gpu', strategy='ddp', max_epochs = args.max_epochs, log_every_n_steps=5) 
 
    transform_train = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 

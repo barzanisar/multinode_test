@@ -16,7 +16,7 @@ ssh into your account on compute canada and clone this repo
 2. cd to multinode_test/ddp
 3. run `sbatch submit_job.sh`
 
-## Using pytorch lightning (not working)
+## Using pytorch lightning
 1. ssh into your account on compute canada
 2. cd to multinode_test/lightning
 3. run `sbatch submit_job.sh`

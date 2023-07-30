@@ -7,8 +7,6 @@ export NCCL_BLOCKING_WAIT=1
 
 echo "Node $SLURM_NODEID says: main node at $MASTER_ADDR:$MASTER_PORT"
 echo "Node $SLURM_NODEID says: Launching python script with accelerate..."
-echo "SLURM NTASKS: $SLURM_NTASKS"
-echo "SLURM_NNODES: $SLURM_NNODES"
 
 accelerate launch \
 --multi_gpu \

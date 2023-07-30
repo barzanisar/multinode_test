@@ -13,6 +13,7 @@ export MASTER_PORT=34567
 
 ## Create a virtualenv and install accelerate + its dependencies on all nodes ##
 echo "SLURM_NNODES: $SLURM_NNODES"
+echo "SLURM NTASKS: $SLURM_NTASKS"
 srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_acc.sh
 
 

@@ -6,8 +6,5 @@ export NCCL_BLOCKING_WAIT=1
 
 echo "Node $SLURM_NODEID says: Launching python script..."
 
-# $SLURM_NTASKS should be the same as $SLURM_NNODES
-echo "SLURM NTASKS: $SLURM_NTASKS"
-echo "SLURM_NNODES: $SLURM_NNODES" 
-
-python pytorch-pl-test.py  --batch_size 256 --num_workers 2
+# run this without srun to run only once per task
+python pytorch-pl-test.py  --batch_size 256 --num_workers 4

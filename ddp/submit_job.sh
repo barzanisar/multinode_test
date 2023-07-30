@@ -8,11 +8,13 @@
 #SBATCH --output=%N-%j.out       
 #SBATCH --account=rrg-swasland
 
-export MASTER_ADDR=$(hostname) # Store the master node’s IP address in the MASTER_ADDR environment variable.
+export MASTER_ADDR=$(hostname) # Store the master node’s IP address or name in the MASTER_ADDR environment variable.
 export MASTER_PORT=34567       # TCP port of master node
 
 ## Create a virtualenv and install your python program dependencies on all nodes ##
-echo "SLURM_NNODES: $SLURM_NNODES"
+# $SLURM_NTASKS should be the same as $SLURM_NNODES
+echo "SLURM NTASKS: $SLURM_NTASKS"
+echo "SLURM_NNODES: $SLURM_NNODES" 
 srun -N $SLURM_NNODES -n $SLURM_NNODES config_env_ddp.sh
 
 # “srun” executes the script <tasks-per-node * nodes> times
