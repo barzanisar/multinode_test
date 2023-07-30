@@ -70,7 +70,7 @@ def main():
       We also set progress_bar_refresh_rate=0 to avoid writing a progress bar to the logs, 
       which can cause issues due to updating logs too frequently."""
 
-   trainer = pl.Trainer(devices=8, num_nodes=2, accelerator='gpu', strategy='ddp', max_epochs = args.max_epochs) 
+   trainer = pl.Trainer(devices=4, num_nodes=2, accelerator='gpu', strategy='ddp', max_epochs = args.max_epochs) 
    #trainer = pl.Trainer(devices=torch.cuda.device_count(), num_nodes=1, accelerator='gpu', strategy='ddp', max_epochs = args.max_epochs) 
 
    transform_train = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
