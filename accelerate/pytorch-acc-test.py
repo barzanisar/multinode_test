@@ -60,7 +60,7 @@ def main():
     transform_train = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-    dataset_train = CIFAR10(root='./data', train=True,
+    dataset_train = CIFAR10(root='../data', train=True,
                             download=False, transform=transform_train)
 
     train_sampler = torch.utils.data.distributed.DistributedSampler(
